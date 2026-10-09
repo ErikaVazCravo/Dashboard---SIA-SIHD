@@ -2,6 +2,8 @@
 
 Aplicação Streamlit local que reúne as sete automações existentes. Os scripts originais foram preservados; as funções migradas estão em `processadores/` e o encadeamento está em `processamento.py`.
 
+A opção **UPAs · FAA**, no menu lateral, reúne também a automação `Contagem Procedimentos UPAs FAA.py`. Ela pode ser utilizada sozinha, sem SIGTAP e sem os relatórios SIA/SIHD, inclusive quando o aplicativo está hospedado no Streamlit.
+
 ## Iniciar
 
 Na primeira utilização, abra um terminal nesta pasta e execute:
@@ -30,6 +32,18 @@ O aplicativo abre no navegador em `http://localhost:8501`. Mantenha o terminal a
 O nome dos arquivos enviados não precisa conter os códigos dos relatórios: cada campo determina sua finalidade. PDFs digitalizados precisam ser convertidos para texto antes do envio. A aplicação não aplica filtros a um relatório enviado no campo errado: exporte os filtros indicados no SIHD.
 
 ## Resultados
+
+### Contagem FAA das UPAs
+
+Selecione **UPAs · FAA**, informe a competência e envie os XLSX originais nos campos de UPA Central (2064731), UPA Vila Xavier (4047184) e UPA Selmi Dei (9099581). É possível processar apenas uma UPA ou várias, com um ou mais arquivos por campo. A competência informada é aplicada aos arquivos; confira seus períodos e evite relatórios com dados sobrepostos. Arquivos idênticos repetidos são rejeitados.
+
+É utilizada a primeira aba de cada XLSX, com busca de cabeçalho nas primeiras 20 linhas. São necessárias as colunas `Unidade Prestadora`, `Especialidade` e `Quantidade`. As quantidades devem ser inteiras e não negativas. A UPA é definida pelo campo de upload; se o conteúdo identificar outra UPA cadastrada, o processamento é interrompido para conferência.
+
+O download **FAA_UPAs-RESULTADO.xlsx** contém as abas **ESPECIALIDADES_PADRONIZADAS** e **ORIGINAL**, com os mesmos CNES, nomes e regras de agrupamento de especialidades do script original. O botão **Limpar arquivos e resultados FAA** limpa somente essa opção. A alteração de entradas invalida o resultado anterior para evitar downloads desatualizados.
+
+Baixe os resultados antes de trocar de automação no menu: os uploads e resultados da opção anterior são descartados.
+
+### SIA e SIHD
 
 | Arquivo | Conteúdo |
 | --- | --- |

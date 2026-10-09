@@ -4,8 +4,22 @@ from processamento import RELATORIOS, processar, compactar
 
 st.set_page_config(page_title='Dashboard • SIA + SIHD', page_icon='📊', layout='wide')
 st.title('Dashboard · SIA + SIHD')
-st.write('Envie os relatórios da competência para gerar todas as planilhas das automações.')
 st.caption('Processamento em memória, sem salvar entradas ou resultados no disco. Faça o download antes de limpar a sessão.')
+
+
+def trocar_automacao():
+    # Campos de upload são descartados quando deixam de aparecer; os resultados
+    # também precisam ser invalidados para não reaparecer com entradas vazias.
+    for chave in ('resultados', 'avisos', 'zip', 'faa_resultado', 'faa_resumo'):
+        st.session_state.pop(chave, None)
+
+
+opcao = st.sidebar.radio('Automação', ['SIA + SIHD', 'UPAs · FAA'], on_change=trocar_automacao)
+if opcao == 'UPAs · FAA':
+    from interface_faa import mostrar_faa
+    mostrar_faa()
+    st.stop()
+st.write('Envie os relatórios da competência para gerar todas as planilhas das automações.')
 
 
 def invalidar():
