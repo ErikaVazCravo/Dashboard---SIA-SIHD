@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+tests/fixture_*/
+tests/tmp*/
+tmp/
+output/
+.env
+.env.*
+.streamlit/secrets.toml
+Nomes_estabelecimentos.txt
+SIGTAP/
+*.pdf
+*.xlsx
+*.xls
+*.zip
